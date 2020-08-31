@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
+const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+
+dotenv.config();
 
 //Connect to DB
 mongoose.connect(
-  "mongodb+srv://patrykraj:owen1@cluster0.67pqm.mongodb.net/shop-template?retryWrites=true&w=majority",
+  process.env.DB_CONNECT,
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => console.log("connected to db!")
 );
