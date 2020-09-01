@@ -23,7 +23,7 @@ mongoose
   .catch((err) => console.log("Could not connect to mongoDB", err));
 
 var corsOptions = {
-  origin: "http://localhost:5001",
+  origin: "http://localhost:8080",
 };
 
 app.use(cors(corsOptions));
