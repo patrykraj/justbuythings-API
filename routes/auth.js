@@ -13,7 +13,10 @@ router.post("/register", async (req, res) => {
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const { name, email, password } = req.body;
+  const { name, lastname, email, password, repeatPassword } = req.body;
+
+  if (password !== repeatPassword)
+    return res.status(400).send("Passwords must be the same");
 
   //check if the email is unique
   const emailExists = await User.findOne({ email: email });
@@ -25,13 +28,20 @@ router.post("/register", async (req, res) => {
 
   const user = new User({
     name,
+    lastname,
     email,
     password: hashedPassword,
   });
 
   try {
     const savedUser = await user.save();
-    res.send({ user: user._id });
+    res.send({
+      user: user._id,
+      name: user.name,
+      lastname: user.lastname,
+      email: user.email,
+      transactions: user.transactions,
+    });
   } catch (error) {
     res.status(400).send(error);
   }
@@ -40,7 +50,10 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   console.log(req.body, "req");
   const { error } = loginValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) {
+    console.log(error.details[0].message, "error!!!!!!!!");
+    return res.status(400).send(error.details[0].message);
+  }
 
   const { email, password } = req.body;
 
@@ -53,7 +66,16 @@ router.post("/login", async (req, res) => {
   if (!validPass) return res.status(400).send("Invalid password.");
 
   //Create and assing a token
-  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+  const token = jwt.sign(
+    {
+      _id: user._id,
+      name: user.name,
+      lastname: user.lastname,
+      email: user.email,
+      transactions: user.transactions,
+    },
+    process.env.TOKEN_SECRET
+  );
   res.header("auth-token", token).send(token);
 });
 
