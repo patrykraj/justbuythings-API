@@ -24,6 +24,7 @@ mongoose
 
 var corsOptions = {
   origin: "http://localhost:8080",
+  Authorization: "*",
 };
 
 app.use(cors(corsOptions));
@@ -39,10 +40,6 @@ app.use(bodyParser.json());
 
 //Route Middlewares
 app.use("/api/user", authRoute);
-
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome application." });
-});
 
 const PORT = process.env.PORT || 5000;
 
