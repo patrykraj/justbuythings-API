@@ -86,40 +86,4 @@ router.post("/login", async (req, res) => {
   res.header("auth-token", token).send(token);
 });
 
-router.get("/getuser", authenticateToken, async (req, res) => {
-  let user = await User.findOne({ email: req.user.email });
-  user = {
-    _id: user._id,
-    name: user.name,
-    lastname: user.lastname,
-    email: user.email,
-    transactions: user.transactions,
-  };
-  res.send(user);
-});
-
-function authenticateToken(req, res, next) {
-  const token = req.headers["auth-token"];
-
-  if (token == null) {
-    console.log("NO TOKEN PROVIDED");
-    return res.status(401).send("Access denied. No token provided");
-  }
-
-  jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-    if (err) {
-      console.log("TOKEN EXPIRED");
-      return res.status(403).send("Access denied. Token expired");
-    }
-
-    try {
-      const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-      req.user = decoded;
-      next();
-    } catch (error) {
-      res.status(400).send("Invalid token.");
-    }
-  });
-}
-
 module.exports = router;
