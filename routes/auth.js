@@ -39,7 +39,6 @@ router.post("/register", async (req, res) => {
     const savedUser = await user.save();
     const token = jwt.sign(
       {
-        _id: user._id,
         name: user.name,
         lastname: user.lastname,
         email: user.email,
@@ -75,7 +74,6 @@ router.post("/login", async (req, res) => {
   //Create and assing a token
   const token = jwt.sign(
     {
-      _id: user._id,
       name: user.name,
       lastname: user.lastname,
       email: user.email,

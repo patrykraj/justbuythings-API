@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 //Import Routes
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
+const ordersRoute = require("./routes/orders");
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ app.use(bodyParser.json());
 //Route Middlewares
 app.use("/api/user", authRoute);
 app.use("/api/user", userRoute);
+app.use("/api/orders", ordersRoute);
 
 const PORT = process.env.PORT || 5000;
 

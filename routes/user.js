@@ -6,7 +6,6 @@ const { verifyToken } = require("../middleware/verifyToken");
 router.get("/getuser", verifyToken, async (req, res) => {
   let user = await User.findOne({ email: req.user.email });
   user = {
-    _id: user._id,
     name: user.name,
     lastname: user.lastname,
     email: user.email,
