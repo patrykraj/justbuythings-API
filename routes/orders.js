@@ -8,13 +8,8 @@ router.patch("/buy", async (req, res) => {
   );
   let user = await User.findOne({ email: req.body.email });
 
-  user = {
-    name: user.name,
-    lastname: user.lastname,
-    email: user.email,
-    transactions: user.transactions,
-  };
-  res.send(user);
+  transactions = user.transactions;
+  res.send(transactions);
 });
 
 router.patch("/cancel", async (req, res) => {
@@ -28,13 +23,7 @@ router.patch("/cancel", async (req, res) => {
   );
   let user = await User.findOne({ email: req.body.email });
 
-  user = {
-    name: user.name,
-    lastname: user.lastname,
-    email: user.email,
-    transactions: user.transactions,
-  };
-  res.send(user);
+  (transactions = user.transactions), res.send(transactions);
 });
 
 module.exports = router;
