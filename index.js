@@ -8,14 +8,12 @@ const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
-//Import Routes
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const ordersRoute = require("./routes/orders");
 
 dotenv.config();
 
-//Connect to DB
 mongoose
   .connect(process.env.DB_CONNECT, {
     useNewUrlParser: true,
@@ -32,7 +30,6 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
-//Middleware
 app.use(express.json());
 app.use(
   bodyParser.urlencoded({
@@ -41,7 +38,6 @@ app.use(
 );
 app.use(bodyParser.json());
 
-//Route Middlewares
 app.use("/api/user", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/orders", ordersRoute);
