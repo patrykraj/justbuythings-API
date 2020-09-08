@@ -24,12 +24,14 @@ mongoose
 
 const corsOptions = {
   origin: "*",
-  methods: "GET,PATCH,POST,DELETE",
   credentials: true,
-  headers:
-    "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json",
+  headers: "Origin,X-Requested-With,Content-Type,Accept",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
 };
 
+app.options("*", cors());
 app.use(cors(corsOptions));
 
 app.use(express.json());
