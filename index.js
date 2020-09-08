@@ -25,6 +25,9 @@ mongoose
 const corsOptions = {
   origin: "*",
   methods: "GET,PATCH,POST,DELETE",
+  credentials: true,
+  headers:
+    "Origin,X-Requested-With,Content-Type,Accept,content-type,application/json",
 };
 
 app.use(cors(corsOptions));
