@@ -24,7 +24,8 @@ mongoose
 
 var corsOptions = {
   origin: "https://whispering-plateau-76035.herokuapp.com",
-  Authorization: "*",
+  "Access-Control-Allow-Origin":
+    "https://whispering-plateau-76035.herokuapp.com",
 };
 
 app.use(cors(corsOptions));
