@@ -22,13 +22,7 @@ mongoose
   .then(() => console.log("connected to db!"))
   .catch((err) => console.log("Could not connect to mongoDB", err));
 
-var corsOptions = {
-  origin: "https://whispering-plateau-76035.herokuapp.com",
-  "Access-Control-Allow-Origin":
-    "https://whispering-plateau-76035.herokuapp.com",
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(express.json());
 app.use(
