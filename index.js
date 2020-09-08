@@ -22,16 +22,10 @@ mongoose
   .then(() => console.log("connected to db!"))
   .catch((err) => console.log("Could not connect to mongoDB", err));
 
-const corsOptions = {
+var corsOptions = {
   origin: "*",
-  credentials: true,
-  headers: "Origin,X-Requested-With,Content-Type,Accept",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
 };
 
-app.options("*", cors());
 app.use(cors(corsOptions));
 
 app.use(express.json());
