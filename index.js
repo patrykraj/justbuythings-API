@@ -23,7 +23,7 @@ mongoose
   .catch((err) => console.log("Could not connect to mongoDB", err));
 
 var corsOptions = {
-  origin: "http://localhost:8080",
+  origin: "https://whispering-plateau-76035.herokuapp.com",
   Authorization: "*",
 };
 
