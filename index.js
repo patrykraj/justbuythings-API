@@ -22,7 +22,12 @@ mongoose
   .then(() => console.log("connected to db!"))
   .catch((err) => console.log("Could not connect to mongoDB", err));
 
-app.use(cors());
+const corsOptions = {
+  origin: "*",
+  methods: "GET,PATCH,POST,DELETE",
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(
